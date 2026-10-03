@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
 
-// 1. Arahkan direktori storage & cache Laravel ke folder temporary Vercel (/tmp)
+// Arahkan direktori storage & cache Laravel ke folder temporary Vercel (/tmp)
 $_ENV['APP_STORAGE'] = '/tmp/storage';
 $_ENV['VIEW_COMPILED_PATH'] = '/tmp/storage/framework/views';
 
@@ -22,12 +22,10 @@ foreach ($directories as $directory) {
     }
 }
 
-// 2. Load Autoloader & Bootstrap Laravel secara langsung
 require __DIR__ . '/../vendor/autoload.php';
 
 $app = require_once __DIR__ . '/../bootstrap/app.php';
 
-// 3. Jalankan aplikasi Laravel
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 
 $response = $kernel->handle(
