@@ -4,16 +4,19 @@ use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
 
-// Direct storage & cache ke folder temporary Vercel (/tmp)
+// 1. Arahkan Storage, Views, dan Bootstrap Cache ke /tmp (Writable)
 $_ENV['APP_STORAGE'] = '/tmp/storage';
 $_ENV['VIEW_COMPILED_PATH'] = '/tmp/storage/framework/views';
+$_ENV['LOG_CHANNEL'] = 'stderr'; // Kirim log ke Vercel console, bukan file fisik
 
+// Pastikan folder temporer dibuat
 $directories = [
     '/tmp/storage/framework/views',
     '/tmp/storage/framework/cache',
     '/tmp/storage/framework/sessions',
     '/tmp/storage/logs',
     '/tmp/storage/app/public',
+    '/tmp/bootstrap/cache',
 ];
 
 foreach ($directories as $directory) {
@@ -22,16 +25,21 @@ foreach ($directories as $directory) {
     }
 }
 
-// Maintenance mode check
-if (file_exists($maintenance = __DIR__ . '/../storage/framework/maintenance.php')) {
-    require $maintenance;
-}
+// 2. Override path bootstrap/cache sebelum autoloader berjalan
+putenv('APP_SERVICES_CACHE=/tmp/bootstrap/cache/services.php');
+putenv('APP_PACKAGES_CACHE=/tmp/bootstrap/cache/packages.php');
+putenv('APP_CONFIG_CACHE=/tmp/bootstrap/cache/config.php');
+putenv('APP_ROUTES_CACHE=/tmp/bootstrap/cache/routes.php');
+putenv('APP_EVENTS_CACHE=/tmp/bootstrap/cache/events.php');
 
 // Register Autoloader
 require __DIR__ . '/../vendor/autoload.php';
 
-// Bootstrap Laravel 12 & Handle Request
+// Bootstrap Aplikasi Laravel
 $app = require_once __DIR__ . '/../bootstrap/app.php';
+
+// Set path bootstrap cache pada instansiasi aplikasi
+$app->useStoragePath('/tmp/storage');
 
 try {
     $app->handleRequest(Request::capture());
