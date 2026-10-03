@@ -4,12 +4,16 @@ use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
 
-// 1. Arahkan Storage, Views, dan Bootstrap Cache ke /tmp (Writable)
+// 1. Direct Storage & Cache ke /tmp
 $_ENV['APP_STORAGE'] = '/tmp/storage';
 $_ENV['VIEW_COMPILED_PATH'] = '/tmp/storage/framework/views';
-$_ENV['LOG_CHANNEL'] = 'stderr'; // Kirim log ke Vercel console, bukan file fisik
+$_ENV['LOG_CHANNEL'] = 'stderr';
+$_ENV['SESSION_DRIVER'] = $_ENV['SESSION_DRIVER'] ?? 'cookie';
+$_ENV['CACHE_STORE'] = $_ENV['CACHE_STORE'] ?? 'array';
+$_ENV['DB_CONNECTION'] = $_ENV['DB_CONNECTION'] ?? 'sqlite';
+$_ENV['DB_DATABASE'] = $_ENV['DB_DATABASE'] ?? '/tmp/database.sqlite';
 
-// Pastikan folder temporer dibuat
+// Buat direktori sementara
 $directories = [
     '/tmp/storage/framework/views',
     '/tmp/storage/framework/cache',
@@ -25,20 +29,23 @@ foreach ($directories as $directory) {
     }
 }
 
-// 2. Override path bootstrap/cache sebelum autoloader berjalan
+// Buat file SQLite kosong jika belum ada
+if (!file_exists('/tmp/database.sqlite')) {
+    touch('/tmp/database.sqlite');
+}
+
+// 2. Override path cache
 putenv('APP_SERVICES_CACHE=/tmp/bootstrap/cache/services.php');
 putenv('APP_PACKAGES_CACHE=/tmp/bootstrap/cache/packages.php');
 putenv('APP_CONFIG_CACHE=/tmp/bootstrap/cache/config.php');
 putenv('APP_ROUTES_CACHE=/tmp/bootstrap/cache/routes.php');
 putenv('APP_EVENTS_CACHE=/tmp/bootstrap/cache/events.php');
 
-// Register Autoloader
+// Autoload
 require __DIR__ . '/../vendor/autoload.php';
 
-// Bootstrap Aplikasi Laravel
+// Bootstrap Aplikasi
 $app = require_once __DIR__ . '/../bootstrap/app.php';
-
-// Set path bootstrap cache pada instansiasi aplikasi
 $app->useStoragePath('/tmp/storage');
 
 try {
