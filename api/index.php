@@ -4,7 +4,18 @@ use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
 
-// 1. Direct Storage & Cache ke /tmp
+// 1. Dapatkan Protokol & Host secara Dinamis
+$scheme = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'https';
+$host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+$baseUrl = $scheme . '://' . $host;
+
+// Set APP_URL dan ASSET_URL agar CSS, JS, dan Gambar memanggil URL domain Vercel yang benar
+$_ENV['APP_URL'] = $baseUrl;
+$_ENV['ASSET_URL'] = $baseUrl;
+putenv("APP_URL={$baseUrl}");
+putenv("ASSET_URL={$baseUrl}");
+
+// 2. Direct Storage & Cache ke /tmp
 $_ENV['APP_STORAGE'] = '/tmp/storage';
 $_ENV['VIEW_COMPILED_PATH'] = '/tmp/storage/framework/views';
 $_ENV['LOG_CHANNEL'] = 'stderr';
@@ -34,7 +45,7 @@ if (!file_exists('/tmp/database.sqlite')) {
     touch('/tmp/database.sqlite');
 }
 
-// 2. Override path cache
+// Override path cache
 putenv('APP_SERVICES_CACHE=/tmp/bootstrap/cache/services.php');
 putenv('APP_PACKAGES_CACHE=/tmp/bootstrap/cache/packages.php');
 putenv('APP_CONFIG_CACHE=/tmp/bootstrap/cache/config.php');
