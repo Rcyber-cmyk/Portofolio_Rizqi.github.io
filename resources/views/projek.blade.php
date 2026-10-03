@@ -77,8 +77,8 @@
                     </div>
 
                     <!-- Foto 2 -->
-                    <div class="group relative bg-slate-950 rounded-xl overflow-hidden border border-slate-700/60 h-48 md:h-56 cursor-pointer" @click="openModal = true; imgUrl = '{{ asset('images/projek2.png') }}'; imgTitle = 'Tampilan Fitur 2'">
-                        <img src="{{ asset('images/projek2.png') }}" alt="Dokumentasi 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e293b/ffffff?text=Setup+Kerja';">
+                    <div class="group relative bg-slate-950 rounded-xl overflow-hidden border border-slate-700/60 h-48 md:h-56 cursor-pointer" @click="openModal = true; imgUrl = '{{ asset('images/projek2.PNG') }}'; imgTitle = 'Tampilan Fitur 2'">
+                        <img src="{{ asset('images/projek2.PNG') }}" alt="Dokumentasi 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.src='https://placehold.co/400x300/1e293b/ffffff?text=Setup+Kerja';">
                         <div class="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                             <button class="bg-indigo-600 text-white text-xs px-3 py-1.5 rounded-lg shadow font-medium flex items-center gap-1">
                                 🔍 Lihat Detail
