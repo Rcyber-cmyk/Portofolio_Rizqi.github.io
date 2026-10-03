@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
 
-// Arahkan direktori storage & cache Laravel ke folder temporary Vercel (/tmp)
+// Direct storage & cache ke /tmp Vercel
 $_ENV['APP_STORAGE'] = '/tmp/storage';
 $_ENV['VIEW_COMPILED_PATH'] = '/tmp/storage/framework/views';
 
@@ -22,16 +22,15 @@ foreach ($directories as $directory) {
     }
 }
 
-require __DIR__ . '/../vendor/autoload.php';
+// Maintenance mode check
+if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php')) {
+    require $maintenance;
+}
 
-$app = require_once __DIR__ . '/../bootstrap/app.php';
+// Register Autoloader
+require __DIR__.'/../vendor/autoload.php';
 
-$kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
+// Bootstrap Laravel 12 & Handle Request
+$app = require_once __DIR__.'/../bootstrap/app.php';
 
-$response = $kernel->handle(
-    $request = Request::capture()
-);
-
-$response->send();
-
-$kernel->terminate($request, $response);
+$app->handleRequest(Request::capture());
