@@ -35,6 +35,92 @@
                     <!-- Container Gambar & Overlay Preview -->
                     <div class="relative overflow-hidden aspect-[4/3] bg-slate-950">
                         <img 
+                            src="{{ asset('images/sertif20.png') }}" 
+                            alt="Sertifikasi Indosat" 
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            onerror="this.onerror=null; this.src='https://placehold.co/600x450/1e293b/ffffff?text=Cisco+CCNA+Routing';"
+                        >
+                        <div class="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2">
+                            <button 
+                                @click="openModal = true; imgUrl = '{{ asset('images/sertif20.png') }}'; imgTitle = 'Sertifikasi SQL'" 
+                                class="bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-xs px-4 py-2 rounded-lg shadow-lg transition-transform transform hover:scale-105 flex items-center gap-1.5">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                Lihat Pratinjau
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Konten Kartu -->
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-red-500 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-md">
+                                Belajar SQL
+                            </span>
+                            <span class="text-xs text-slate-400 font-semibold">2026</span>
+                        </div>
+                        <h2 class="text-lg font-bold text-white group-hover:text-indigo-400 transition-colors duration-200">
+                            Mahir SQL JOIN
+                        </h2>
+                    </div>
+                </div>
+
+                <!-- Footer Card -->
+                <div class="px-6 pb-6 pt-2 border-t border-slate-700/40 flex items-center justify-between text-xs text-slate-400">
+                    <span class="flex items-center gap-1">
+                        <svg class="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                        Kursus Online
+                    </span>
+                    <span class="text-slate-400 font-mono">Ngulik Data</span>
+                </div>
+            </div>
+            <div class="group bg-slate-800/80 backdrop-blur-md rounded-2xl overflow-hidden border border-slate-700/60 shadow-xl hover:shadow-2xl hover:shadow-indigo-500/10 hover:border-indigo-500/50 transition-all duration-300 flex flex-col justify-between">
+                <div>
+                    <!-- Container Gambar & Overlay Preview -->
+                    <div class="relative overflow-hidden aspect-[4/3] bg-slate-950">
+                        <img 
+                            src="{{ asset('images/sertif19.png') }}" 
+                            alt="Sertifikasi Indosat" 
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            onerror="this.onerror=null; this.src='https://placehold.co/600x450/1e293b/ffffff?text=Cisco+CCNA+Routing';"
+                        >
+                        <div class="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2">
+                            <button 
+                                @click="openModal = true; imgUrl = '{{ asset('images/sertif19.png') }}'; imgTitle = 'Sertifikasi SQL'" 
+                                class="bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-xs px-4 py-2 rounded-lg shadow-lg transition-transform transform hover:scale-105 flex items-center gap-1.5">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                Lihat Pratinjau
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Konten Kartu -->
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-red-500 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-md">
+                                Belajar SQL
+                            </span>
+                            <span class="text-xs text-slate-400 font-semibold">2026</span>
+                        </div>
+                        <h2 class="text-lg font-bold text-white group-hover:text-indigo-400 transition-colors duration-200">
+                            SQL Logika Kondisional
+                        </h2>
+                    </div>
+                </div>
+
+                <!-- Footer Card -->
+                <div class="px-6 pb-6 pt-2 border-t border-slate-700/40 flex items-center justify-between text-xs text-slate-400">
+                    <span class="flex items-center gap-1">
+                        <svg class="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                        Kursus Online
+                    </span>
+                    <span class="text-slate-400 font-mono">Ngulik Data</span>
+                </div>
+            </div>
+            <div class="group bg-slate-800/80 backdrop-blur-md rounded-2xl overflow-hidden border border-slate-700/60 shadow-xl hover:shadow-2xl hover:shadow-indigo-500/10 hover:border-indigo-500/50 transition-all duration-300 flex flex-col justify-between">
+                <div>
+                    <!-- Container Gambar & Overlay Preview -->
+                    <div class="relative overflow-hidden aspect-[4/3] bg-slate-950">
+                        <img 
                             src="{{ asset('images/sertif18.png') }}" 
                             alt="Sertifikasi Indosat" 
                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
